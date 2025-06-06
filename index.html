@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-T">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora Diaria - Telesecundaria 41</title>
+    <link rel="icon" type="image/png" href="./images/logoTS_WhiteTrans.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; /* Light blue background */
+        }
+        .form-textarea {
+            min-height: 100px;
+        }
+        /* Custom gradient for header */
+        .header-gradient {
+            background: linear-gradient(to right, #050a4e, #202782); /* sky-500 to cyan-400 */
+        }
+        /* Fun accent color for specific elements, e.g., focus rings or highlights */
+        .form-input.fun-accent-focus:focus, .form-textarea.fun-accent-focus:focus {
+             --tw-ring-color: #f59e0b; /* amber-500 */
+             border-color: #f59e0b;
+        }
+    </style> 
+</head>
+
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col">
+        
+        <!-- Header -->
+        <header class="header-gradient shadow-lg p-4">
+            <div class="container mx-auto flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="./images/logoTS_WhiteTrans.png" alt="Logo Telesecundaria 41" class="h-16 w-auto mr-4 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/64x64/800020/FFFFFF?text=Logo';">
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-white">Bitácora Docente - Diario</h1>
+                        <p class="text-normal text-sky-100">Telesecundaria 41 - 02EV0041T - Poblado Villa Zapata</p>
+                    </div>
+                </div>
+                 <div id="userInfo" class="text-right">
+                    <p class="text-xs text-white">ID de Usuario: <span id="userIdDisplay" class="font-semibold">Cargando...</span></p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto p-4 sm:p-4 lg:p-4">
+            <form id="logbookForm" class="bg-white p-2 sm:p-8 rounded-xl shadow-2xl">
+                
+                <div class="bg-slate-100 mb-6 shadow-lg rounded-lg p-6">
+                    <h2 class="text-2xl font-bold text-blue-900 border-blue-700 pb-2 border-b-2 mb-2">Información General</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 mb-4">
+                        <div class="grid grid-flow-row">
+                            <label for="fecha" class="text-xl font-medium text-sky-600">Fecha:</label>
+                            <input type="date" id="fecha" name="fecha" class="text-xl font-medium text-slate-500 border-sky-400 border-2 rounded-lg p-2 focus:border-orange-500 focus:outline focus:outline-orange-500" required>
+                        </div>
+                        <div class="grid grid-flow-row">
+                            <label for="docente" class="text-xl font-medium text-sky-600">Nombre del Docente:</label>
+                            <select id="docente" name="docente" class="text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg p-2 focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Ej: Prof. Juan Pérez" required>
+                                <option value="" disabled selected>Seleccione un docente...</option>
+                                <option value="Profra. Yvonne Fonseca Zárate">Profra. Yvonne Fonseca Zárate</option>
+                                <option value="Profr. Ricardo Rodríguez Landeros">Profr. Ricardo Rodríguez Landeros</option>
+                                <option value="Profr. Jesús A. Vásquez Córdova">Profr. Jesús A. Vásquez Córdova</option>
+                                <option value="Profr. Pablo Y. Urías Solórzano">Profr. Pablo Y. Urías Solórzano</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-flow-row">
+                            <label for="gradoGrupo" class="text-xl font-medium text-sky-600">Grado y Grupo:</label>
+                            <input type="text" id="gradoGrupo" name="gradoGrupo" class="grow-0 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg p-2 focus:border-orange-500 focus:outline focus:outline-orange-500 cursor-not-allowed bg-slate-100" placeholder="Se asigna automáticamente" required readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-100 mb-6 shadow-lg rounded-lg p-6">
+                    <h2 class="text-2xl font-bold border-blue-700 pb-2 pt-2 border-b-2 mb-2 text-blue-900">Planificación y Contenido</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 mb-4">
+                        <div class="grid grid-flow-row">
+                            <label for="asignaturas" class="text-xl font-medium text-sky-600 border-sky-200">Campos formativos del Día:</label>
+                            <textarea id="asignaturas" name="asignaturas" rows="3" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg pb-2 focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Ej: Lenguajes, Desarrollo Humano y Comunitario..."></textarea>
+                        </div>
+                        <div class="grid grid-flow-row">
+                            <label for="aprendizajes" class="text-xl font-medium text-sky-600 border-sky-200">Contenidos y PDA Relevantes:</label>
+                            <textarea id="aprendizajes" name="aprendizajes" rows="3" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-xl focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Describe los principales contenidos o PDA de la jornada..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-100 mb-6 shadow-lg rounded-lg p-6">
+                    <h2 class="text-2xl font-bold border-sky-200 pb-2 pt-2 border-b-2 mb-2 text-blue-900">Desarrollo de la Jornada</h2>
+                    <div class="mb-4">
+                        <div class="grid grid-flow-row">
+                            <label for="actividades" class="text-xl font-medium text-sky-600 border-sky-200">Resumen de Actividades Realizadas:</label>
+                            <textarea id="actividades" name="actividades" rows="4" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Describe brevemente las actividades y dinámicas llevadas a cabo..."></textarea>
+                        </div>
+                        <div class="grid grid-flow-row">
+                            <label for="narrativa" class="text-xl font-medium text-sky-600 pb-2">Narrativa Detallada de la Jornada:</label>
+                            <textarea id="narrativa" name="narrativa" rows="4" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg pb-2 focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Describe observaciones sobre el grupo, participación, ambiente, eventos relevantes..." required></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-100 mb-6 shadow-lg rounded-lg p-6">
+                    <h2 class="text-2xl font-bold border-sky-200 pb-2 pt-2 border-b-2 mb-2 text-blue-900">Reflexión y Seguimiento</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-x-6 mb-4">
+                        <div class="grid grid-flow-row">
+                            <label for="dificultades" class="text-xl font-medium text-sky-600 border-sky-200">Dificultades Presentadas y Estrategias Aplicadas:</label>
+                            <textarea id="dificultades" name="dificultades" rows="3" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg pb-2 focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Aspectos positivos, avances significativos de los alumnos o del grupo..."></textarea>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 mb-4">
+                        <div class="grid grid-flow-row">
+                            <label for="seguimiento" class="text-xl font-medium text-sky-600 border-sky-200">Acciones de Seguimiento / Pendientes:</label>
+                            <textarea id="seguimiento" name="seguimiento" rows="4" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg pb-2 focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Tareas para el docente, recordatorios, próximos pasos..."></textarea>
+                        </div>
+                        <div class="grid grid-flow-row">
+                            <label for="comentarios" class="text-xl font-medium text-sky-600 border-sky-200">Comentarios Adicionales:</label>
+                            <textarea id="comentarios" name="comentarios" rows="4" class="p-2 text-xl font-medium text-slate-500 border-2 border-sky-400 rounded-lg pb-2 focus:border-orange-500 focus:outline focus:outline-orange-500" placeholder="Cualquier otra observación o nota pertinente"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-400 flex flex-col sm:flex-row items-center justify-end space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button type="button" id="clearFormButton" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-slate-300 text-base font-medium rounded-md shadow-sm text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">Limpiar Formulario</button>
+                    <button type="submit" id="saveButton" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
+                        <svg id="saveIcon" class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338A2.25 2.25 0 0 0 17.088 3.75H15M12 3.75V7.5m-3-3.75h6" />
+                        </svg>
+                        <svg id="loadingSpinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span id="saveButtonText">Guardar Bitácora</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Status Message Area -->
+            <div id="statusMessage" class="mt-6 p-4 rounded-md text-sm hidden"></div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-800 text-slate-300 text-center p-4 mt-auto">
+            <p>&copy; <span id="currentYear"></span> Telesecundaria 41 - Bitácora Docente. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script type="module">
+        // Firebase imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Firebase Configuration ---
+        // IMPORTANT: Replace with your actual Firebase configuration if deploying outside of the specific environment this was built for.
+        // The __firebase_config, __app_id, and __initial_auth_token are typically injected by the environment.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "YOUR_API_KEY", // Fallback if not injected
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
+        let db, auth;
+        let currentUserId = null;
+        let isAuthReady = false;
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            setLogLevel('debug'); // Enable Firestore debug logging
+            console.log("Firebase initialized successfully.");
+        } catch (error) {
+            console.error("Error initializing Firebase:", error);
+            displayStatusMessage("Error crítico al conectar con la base de datos. Por favor, recarga la página o contacta a soporte.", "error");
+        }
+        
+        // --- Authentication ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                console.log("User is signed in with UID:", currentUserId);
+                document.getElementById('userIdDisplay').textContent = currentUserId;
+                isAuthReady = true;
+            } else {
+                console.log("User is not signed in. Attempting to sign in...");
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        console.log("Attempting sign in with custom token.");
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                        // onAuthStateChanged will be triggered again
+                    } else {
+                        console.log("No custom token, attempting anonymous sign in.");
+                        const userCredential = await signInAnonymously(auth);
+                        currentUserId = userCredential.user.uid;
+                        document.getElementById('userIdDisplay').textContent = currentUserId;
+                        console.log("Signed in anonymously with UID:", currentUserId);
+                    }
+                } catch (error) {
+                    console.error("Error during sign-in:", error);
+                    displayStatusMessage("Error de autenticación. No se podrán guardar los datos.", "error");
+                    document.getElementById('userIdDisplay').textContent = "Error de Auth";
+                } finally {
+                    isAuthReady = true; // Mark auth as ready even if anonymous sign-in was the path
+                }
+            }
+             // Enable form once auth is ready
+            if(isAuthReady) {
+                document.getElementById('saveButton').disabled = false;
+            }
+        });
+
+
+        // --- DOM Elements ---
+        const logbookForm = document.getElementById('logbookForm');
+        const saveButton = document.getElementById('saveButton');
+        const saveButtonText = document.getElementById('saveButtonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const saveIcon = document.getElementById('saveIcon');
+        const statusMessage = document.getElementById('statusMessage');
+        const fechaInput = document.getElementById('fecha');
+        const clearFormButton = document.getElementById('clearFormButton');
+        const gradoGrupoInput = document.getElementById('gradoGrupo');
+
+
+        // --- Utility Functions ---
+        function displayStatusMessage(message, type = "success") {
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700', 'bg-yellow-100', 'text-yellow-700');
+            if (type === "success") {
+                statusMessage.classList.add('bg-green-100', 'text-green-700');
+            } else if (type === "error") {
+                statusMessage.classList.add('bg-red-100', 'text-red-700');
+            } else if (type === "warning") {
+                statusMessage.classList.add('bg-yellow-100', 'text-yellow-700');
+            }
+            statusMessage.classList.remove('hidden');
+            // Automatically hide after 5 seconds
+            setTimeout(() => {
+                statusMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        function setButtonLoadingState(isLoading) {
+            if (isLoading) {
+                saveButton.disabled = true;
+                saveButtonText.textContent = 'Guardando...';
+                loadingSpinner.classList.remove('hidden');
+                saveIcon.classList.add('hidden');
+            } else {
+                saveButton.disabled = false;
+                saveButtonText.textContent = 'Guardar Bitácora';
+                loadingSpinner.classList.add('hidden');
+                saveIcon.classList.remove('hidden');
+            }
+        }
+        
+        function setDefaultDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(today.getDate()).padStart(2, '0');
+            fechaInput.value = `${year}-${month}-${day}`;
+        }
+
+        function clearForm() {
+            logbookForm.reset();
+            setDefaultDate(); // Reset date to today after clearing
+            document.getElementById('docente').focus(); // Focus on the first field
+            displayStatusMessage("Formulario limpiado.", "info");
+        }
+
+        // --- Event Listeners ---
+       
+        // --- Lógica para autocompletar Grado y Grupo ---
+
+        // 1. Mapa de asignación de Docente -> Grupo
+        const teacherGroupMap = {
+            "Profra. Yvonne Fonseca Zárate": "1º A",
+            "Profr. Ricardo Rodríguez Landeros": "2º A",
+            "Profr. Jesús A. Vásquez Córdova": "3º A",
+            "Profr. Pablo Y. Urías Solórzano": "Dirección"
+        };
+
+        // 2. Referencia al selector de docente
+        const docenteSelect = document.getElementById('docente');
+
+        // 3. Evento que se dispara cuando se cambia la selección
+        docenteSelect.addEventListener('change', (event) => {
+            const selectedTeacher = event.target.value;
+            const assignedGroup = teacherGroupMap[selectedTeacher] || ""; // Obtiene el grupo o un string vacío si no hay selección
+            gradoGrupoInput.value = assignedGroup;
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setDefaultDate();
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Disable save button until auth is ready
+            saveButton.disabled = true; 
+            displayStatusMessage("Inicializando sistema de guardado...", "warning");
+
+
+            if (!db || !auth) {
+                 displayStatusMessage("La base de datos no está disponible. No se podrán guardar los datos.", "error");
+                 saveButton.disabled = true;
+            }
+        });
+
+        clearFormButton.addEventListener('click', clearForm);
+
+        logbookForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!isAuthReady || !currentUserId) {
+                displayStatusMessage("La autenticación aún no está lista o falló. No se puede guardar.", "error");
+                console.warn("Attempted to save before auth was ready or with no user ID.");
+                return;
+            }
+            if (!db) {
+                displayStatusMessage("La conexión con la base de datos no está disponible. Intenta más tarde.", "error");
+                return;
+            }
+
+            setButtonLoadingState(true);
+
+            const formData = new FormData(logbookForm);
+            const logEntry = {
+                appContextId: appId, // Store app ID for context
+                userId: currentUserId, // Store user ID
+                fecha: formData.get('fecha'),
+                docente: formData.get('docente'),
+                gradoGrupo: formData.get('gradoGrupo'),
+                asignaturas: formData.get('asignaturas'),
+                aprendizajes: formData.get('aprendizajes'),
+                actividades: formData.get('actividades'),
+                narrativa: formData.get('narrativa'),
+                dificultades: formData.get('dificultades'),
+                logros: formData.get('logros'),
+                seguimiento: formData.get('seguimiento'),
+                comentarios: formData.get('comentarios'),
+                createdAt: serverTimestamp() // Firestore server timestamp
+            };
+
+            // Basic validation
+            if (!logEntry.fecha || !logEntry.docente || !logEntry.gradoGrupo || !logEntry.narrativa) {
+                displayStatusMessage("Por favor, completa los campos obligatorios: Fecha, Docente, Grado y Grupo, y Narrativa.", "error");
+                setButtonLoadingState(false);
+                return;
+            }
+
+            try {
+                // Collection path: /artifacts/{appId}/users/{userId}/{your_collection_name}
+                const collectionPath = `artifacts/${appId}/users/${currentUserId}/bitacora_docente`;
+                const docRef = await addDoc(collection(db, collectionPath), logEntry);
+                console.log("Document written with ID: ", docRef.id);
+                displayStatusMessage("Bitácora guardada exitosamente con ID: " + docRef.id, "success");
+                // Optionally clear form after successful save
+                // logbookForm.reset(); 
+                // setDefaultDate();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                displayStatusMessage(`Error al guardar la bitácora: ${error.message}. Revisa la consola para más detalles.`, "error");
+            } finally {
+                setButtonLoadingState(false);
+            }
+        });
+
+    </script>
+</body>
+</html>
